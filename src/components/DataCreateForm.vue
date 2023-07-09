@@ -3,10 +3,13 @@ import { inject } from "vue";
 import type { FormKitSection, FormKitOptions, ToastServiceMethods, FormSubmitHandler } from "../types";
 import FormKitFactory from "@/factory/FormKitFactory"
 import { useRouter } from 'vue-router'
+import type { I18n } from "vue-i18n/dist/vue-i18n.js";
 const router = useRouter();
 const useToast = inject("useToast") as () => ToastServiceMethods;
 const toast = useToast()
-const i18n = inject("i18n") as any
+const i18n = inject("i18n") as I18n
+
+const { t } = i18n.global
 const props = defineProps({
     sections: {
         type: Array as () => Array<FormKitSection>,
@@ -36,7 +39,7 @@ const submitHandler = async (req: any, node: any) => {
     await new Promise((resolve) => {
         handler.submit(req)
             .then(() => {
-                toast.add({ severity: 'success', summary: i18n.global.t('role_create_summary'), detail: i18n.global.t('role_create_message'), life: 3000 });
+                toast.add({ severity: 'success', summary: t('role_create_summary'), detail: t('role_create_message'), life: 3000 });
                 if (!req.stayOnSamePageAfterSuccess) {
                     router.push({ name: handler.redirectRoute })
                     resolve(null)

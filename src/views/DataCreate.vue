@@ -21,7 +21,7 @@ const sections: FormKitSection[] = [
         outerClass: "col-4",
         name: 'roleName',
         label: t('roleNameLabel'),
-        placeholder: 'roleNamePlaceholder',
+        placeholder: t('roleNamePlaceholder'),
         validation: 'required|length:3',
 
       },
@@ -30,7 +30,7 @@ const sections: FormKitSection[] = [
         outerClass: "col-8",
         name: 'roleDescription',
         label: t('roleDescriptionLabel'),
-        placeholder: 'roleDescriptionPlaceholder',
+        placeholder: t('roleDescriptionPlaceholder'),
         validation: '',
       },
     ],

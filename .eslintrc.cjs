@@ -19,6 +19,9 @@ module.exports = {
       ]
     }
   ],
+  rules: {
+    'no-restricted-imports': 'disbale'
+  },
   parserOptions: {
     ecmaVersion: 'latest'
   }

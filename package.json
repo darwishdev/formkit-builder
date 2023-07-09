@@ -1,7 +1,50 @@
 {
   "name": "formkit-builder",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.2.0",
+  "private": false,
+  "type": "module",
+  "exports": {
+    ".": "./dist/FormkitBuilder.js",
+    "./types": "./dist/types/index.d.ts"
+  },
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "./dist/FormkitBuilder.d.ts",
+  "license": "ISC",
+  "author": "ahmeddarwish",
+  "description": "formkit-builder is a powerful Vue component package designed to streamline form creation and API interaction in Vue.js projects. With formkit-builder, developers can easily generate dynamic forms for data creation and updating, simplifying the process of managing records and communicating with APIs.",
+  "keywords": [
+    "Experience",
+    "the",
+    "synergy",
+    "of",
+    "FormKit",
+    "and",
+    "formkit-builder",
+    "to",
+    "simplify",
+    "form",
+    "creation",
+    "data",
+    "management",
+    "and",
+    "API",
+    "interactions.",
+    "Unlock",
+    "the",
+    "true",
+    "potential",
+    "of",
+    "your",
+    "Vue.js",
+    "applications",
+    "with",
+    "this",
+    "powerful",
+    "and",
+    "developer-friendly",
+    "package."
+  ],
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check build-only",
@@ -15,15 +58,15 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "vue": "^3.3.4",
-    "vue-data-fetcher": "^0.1.2"
+    "vue-data-fetcher": "^0.1.2",
+    "vue": "^3.3.4"
   },
   "peerDependencies": {
     "@formkit/icons": "latest",
     "@formkit/pro": "latest",
-    "vue-i18n": "^9.2.2",
     "@formkit/vue": "latest",
     "primevue": "^3.29.2",
+    "vue-i18n": "^9.2.2",
     "vue-router": "^4.2.2"
   },
   "devDependencies": {
@@ -48,6 +91,7 @@
     "start-server-and-test": "^2.0.0",
     "typescript": "~5.0.4",
     "vite": "^4.3.9",
+    "vite-plugin-dts": "^3.2.0",
     "vitest": "^0.32.0",
     "vue-tsc": "^1.6.5"
   }

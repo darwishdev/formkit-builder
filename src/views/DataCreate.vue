@@ -9,7 +9,7 @@ const errorHandler: Record<string, FormKitError> = {
     roleName: 'unique_constraint_roles_role_name_key'
   }
 }
-const redirectRoute: string = 'roles_list'
+const redirectRoute: string = 'list'
 const sections: FormKitSection[] = [
   {
     roleInfo: [

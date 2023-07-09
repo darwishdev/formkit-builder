@@ -2,8 +2,8 @@
 import { inject } from "vue";
 import type { FormKitSection, FormKitOptions, ToastServiceMethods, FormSubmitHandler } from "../types";
 import FormKitFactory from "@/factory/FormKitFactory"
-import type { Router } from 'vue-router'
-const router = inject("router") as Router;
+import { useRouter } from 'vue-router'
+const router = useRouter();
 const useToast = inject("useToast") as () => ToastServiceMethods;
 const toast = useToast()
 const props = defineProps({
@@ -33,7 +33,6 @@ const submitHandler = async (req: any, node: any) => {
     }
 
     await new Promise((resolve) => {
-
         handler.submit(req)
             .then(() => {
                 node.clearErrors()
@@ -44,6 +43,10 @@ const submitHandler = async (req: any, node: any) => {
                     return
                 }
                 node.reset()
+                node.walk((child: any) => {
+                    child.focuse()
+                    console.log(child.focuse())
+                })
                 resolve(null)
                 node.input({ stayOnSamePageAfterSuccess: true });
             }).catch((error: any) => {

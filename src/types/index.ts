@@ -87,10 +87,16 @@ export type SelectFormKitInput = {
 }
 export type FormKitInput = TextFormKitInput | SelectFormKitInput
 
+export type FormKitSpacer = {
+    $el: string
+    attrs: Record<string, any>
+}
+
 export type FormKitHeader = [
     FormKitFlex,
     FormKitHr
 ]
+
 
 export type FormKitFlex = {
     $el: string
@@ -148,7 +154,7 @@ export type FormKitLoading = {
     if?: string
 }
 export type FormKitWraperChild =
-    FormKitHeader | FormKitLoading
+    FormKitSpacer | FormKitHeader | FormKitLoading
 
 export type FormKitWraper = {
     $el: string
@@ -171,6 +177,7 @@ export type FormKitGrid = {
 export default interface FormKitFactoryInterface {
     CreateSectionOutput(section: FormKitSection): FormKitSectionOutput
     ConvertSections(sections: FormKitSection[]): FormKitSectionOutput[]
+    getSpacer(): FormKitSpacer
     getLoading(): FormKitLoading
     getSubmit(): FormKitSubmit
     getFlex(flexChildren: any, justify: string): FormKitFlex

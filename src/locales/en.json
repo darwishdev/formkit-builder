@@ -1,0 +1,21 @@
+{
+    "roles_list": "roles list",
+    "role_create": "New Role",
+    "new_role": "New Role",
+    "role_details": "Role Details",
+    "role_update": "role update",
+    "role_name": "role name",
+    "error_summary": "Oh snap!",
+    "role_create_summary": "Role saved!",
+    "role_create_message": "You successfully saved this role.",
+    "internalServerError": "somthing wrong happend on your server",
+    "stayOnSamePageAfterSuccess": "bulk create",
+    "roleNameLabel": "Role name",
+    "roleNamePlaceholder": "Please enter the name of the role",
+    "roleDescriptionLabel": "Role description",
+    "roleDescriptionPlaceholder": "Please enter the description of the role",
+    "unique_constraint_roles_role_name_key": "there is role with this name already",
+    "list_error": "Opps! there is unknown error happens",
+    "make_sure": "are you sure you want to take this action",
+    "show_deleted": "show deleted"
+}

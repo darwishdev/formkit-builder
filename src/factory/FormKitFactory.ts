@@ -2,6 +2,8 @@
 
 import type FormKitFactoryInterface from '../types';
 import type { FormKitOptions, FormKitSection, FormKitSectionOutput, FormKitSpacer, FormKitHr, FormKitHeader, FormKitFlex, FormKitInput, FormKitSubmit, FormKitWraper, FormKitTitle, FormKitLoading } from '../types'
+import i18n from '@/locales/i18n';
+const { t } = i18n.global
 
 export class FormKitFactory implements FormKitFactoryInterface {
     private static instance: FormKitFactory;
@@ -57,7 +59,7 @@ export class FormKitFactory implements FormKitFactoryInterface {
         const submit: FormKitSubmit = {
             $formkit: 'submit',
             outerClass: "m-0 w-full",
-            label: "submit",
+            label: t("submit"),
 
         }
         return submit
@@ -80,7 +82,7 @@ export class FormKitFactory implements FormKitFactoryInterface {
             attrs: {
                 class: 'mx-2'
             },
-            children: title
+            children: t(title)
         }
         return formTitle
     }
@@ -97,7 +99,7 @@ export class FormKitFactory implements FormKitFactoryInterface {
         const stayHereToggle: FormKitInput = {
             $formkit: "toggle",
             outerClass: "mb-0 mx-4",
-            label: "stayOnSamePageAfterSuccess",
+            label: t("stayOnSamePageAfterSuccess"),
             name: "stayOnSamePageAfterSuccess"
         }
         const submit = this.getSubmit()

@@ -4,6 +4,7 @@
     "vite-env.d.ts",
     "src/**/*",
     "src/**/*.ts",
+    "src/locales/*.json",
     "src/**/*.vue"
   ],
   "exclude": [

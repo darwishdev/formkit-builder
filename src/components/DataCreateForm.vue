@@ -6,6 +6,7 @@ import { useRouter } from 'vue-router'
 const router = useRouter();
 const useToast = inject("useToast") as () => ToastServiceMethods;
 const toast = useToast()
+const i18n = inject("i18n") as any
 const props = defineProps({
     sections: {
         type: Array as () => Array<FormKitSection>,
@@ -35,7 +36,7 @@ const submitHandler = async (req: any, node: any) => {
     await new Promise((resolve) => {
         handler.submit(req)
             .then(() => {
-                toast.add({ severity: 'success', summary: 'role_create_summary', detail: 'role_create_message', life: 3000 });
+                toast.add({ severity: 'success', summary: i18n.global.t('role_create_summary'), detail: i18n.global.t('role_create_message'), life: 3000 });
                 if (!req.stayOnSamePageAfterSuccess) {
                     router.push({ name: handler.redirectRoute })
                     resolve(null)
@@ -56,11 +57,9 @@ const submitHandler = async (req: any, node: any) => {
                             handler.errorHandler[message]
                         )
                     } else {
-                        node.setErrors([message])
+                        node.setErrors([error.message])
                     }
-
                 }
-
                 resolve(null)
             })
     })

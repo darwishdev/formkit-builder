@@ -6,6 +6,8 @@
     "role_update": "role update",
     "role_name": "role name",
     "error_summary": "Oh snap!",
+    "unknknown_error_happens": "unknknown error happens",
+    "home": "home",
     "role_create_summary": "Role saved!",
     "role_create_message": "You successfully saved this role.",
     "internalServerError": "somthing wrong happend on your server",

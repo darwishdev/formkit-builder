@@ -78,3 +78,20 @@ hr {
   background: var(--color-card);
   color: var(--color-card);
 }
+
+nav {
+  display: flex;
+  color: #fff;
+  font-size: 20px;
+  justify-content: center;
+
+  align-items: center;
+  & a {
+    margin-right: 20px;
+    color: #fff;
+  }
+}
+
+.vh-50 {
+  height: 50vh;
+}

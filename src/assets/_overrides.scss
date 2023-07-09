@@ -101,4 +101,9 @@
 [data-type='submit'] .formkit-input {
   width: 100%;
   background-color: var(--color-primary);
+
+  &:hover {
+    background-color: var(--color-card);
+    transition: background-color 0.5s;
+  }
 }

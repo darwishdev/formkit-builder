@@ -31,4 +31,6 @@ export interface RoleFindResponse {
 
 export interface ApiClient {
     roleCreate: (req: RoleCreateRequest) => Promise<RoleCreateResponse>
+    roleCreateWithErr: (req: RoleCreateRequest) => Promise<RoleCreateResponse>
+    roleCreateWithGlobalErr: (req: RoleCreateRequest) => Promise<RoleCreateResponse>
 }

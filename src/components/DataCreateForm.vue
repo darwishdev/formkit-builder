@@ -35,7 +35,6 @@ const submitHandler = async (req: any, node: any) => {
     await new Promise((resolve) => {
         handler.submit(req)
             .then(() => {
-                node.clearErrors()
                 toast.add({ severity: 'success', summary: 'role_create_summary', detail: 'role_create_message', life: 3000 });
                 if (!req.stayOnSamePageAfterSuccess) {
                     router.push({ name: handler.redirectRoute })
@@ -43,12 +42,9 @@ const submitHandler = async (req: any, node: any) => {
                     return
                 }
                 node.reset()
-                node.walk((child: any) => {
-                    child.focuse()
-                    console.log(child.focuse())
-                })
-                resolve(null)
+                node.clearErrors()
                 node.input({ stayOnSamePageAfterSuccess: true });
+                resolve(null)
             }).catch((error: any) => {
                 const message = error.message.split(' ')[1]
                 if (message == 'internalServerError') {

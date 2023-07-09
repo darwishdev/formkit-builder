@@ -18,6 +18,14 @@ const apiClient: ApiClient = {
         await new Promise((resolve) => setTimeout(resolve, 1000));
         return roleCreateResponse;
     },
+    roleCreateWithErr: async (req: RoleCreateRequest): Promise<RoleCreateResponse> => {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        throw new Error("already_exists unique_constraint_roles_role_name_key")
+    },
+    roleCreateWithGlobalErr: async (req: RoleCreateRequest): Promise<RoleCreateResponse> => {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        throw new Error("internal internalServerError")
+    },
 };
 
 export default apiClient;

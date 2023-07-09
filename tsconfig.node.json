@@ -9,7 +9,10 @@
   ],
   "compilerOptions": {
     "composite": true,
+    "noImplicitAny": false,
     "module": "ESNext",
-    "types": ["node"]
+    "types": [
+      "node"
+    ]
   }
 }

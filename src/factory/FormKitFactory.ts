@@ -1,13 +1,14 @@
 
 
-import type FormKitFactoryInterface from '../types';
-import type { FormKitOptions, FormKitSection, FormKitSectionOutput, FormKitSpacer, FormKitHr, FormKitHeader, FormKitFlex, FormKitInput, FormKitSubmit, FormKitWraper, FormKitTitle, FormKitLoading } from '../types'
+import type FormKitFactoryInterface from '@/types/index';
+import type { FormKitOptions, FormKitSection, FormKitSectionOutput, FormKitSpacer, FormKitHr, FormKitHeader, FormKitFlex, FormKitInput, FormKitSubmit, FormKitWraper, FormKitTitle, FormKitLoading } from '@/types/index'
 import i18n from '@/locales/i18n';
 const { t } = i18n.global
 
 export class FormKitFactory implements FormKitFactoryInterface {
     private static instance: FormKitFactory;
     // isType = <Type>(thing: any): thing is Type => true;
+    forms = {} as any
     private constructor() {
         // Private constructor to prevent instantiation
     }
@@ -102,14 +103,14 @@ export class FormKitFactory implements FormKitFactoryInterface {
             label: t("stayOnSamePageAfterSuccess"),
             name: "stayOnSamePageAfterSuccess"
         }
-        const submit = this.getSubmit()
-        const title: FormKitTitle = this.getTitle(options.title)
+        const submit = FormKitFactory.instance.getSubmit()
+        const title: FormKitTitle = FormKitFactory.instance.getTitle(options.title)
         const header: FormKitHeader =
             [
-                this.getFlex(
+                FormKitFactory.instance.getFlex(
                     [
                         title,
-                        this.getFlex(options.allowBulkDelete ? [
+                        FormKitFactory.instance.getFlex(options.allowBulkDelete ? [
                             stayHereToggle,
                             submit,
                         ] : [submit]),
@@ -117,7 +118,7 @@ export class FormKitFactory implements FormKitFactoryInterface {
 
                     'between'
                 ),
-                this.getHr()
+                FormKitFactory.instance.getHr()
             ]
         return header
     }
@@ -126,8 +127,11 @@ export class FormKitFactory implements FormKitFactoryInterface {
         return Object.keys(section)[0]
     }
     CreateForm(options: FormKitOptions, sections: FormKitSection[]): FormKitWraper {
-        const submit = this.getSubmit()
-        const header = this.getHeader(options)
+        if (Object.keys(FormKitFactory.instance.forms).includes(options.title.toLowerCase())) {
+            return FormKitFactory.instance.forms[options.title.toLowerCase()]
+        }
+        const submit = FormKitFactory.instance.getSubmit()
+        const header = FormKitFactory.instance.getHeader(options)
         const formWrapper: FormKitWraper =
         {
             $el: 'div',
@@ -136,11 +140,11 @@ export class FormKitFactory implements FormKitFactoryInterface {
             },
             children: [...header]
         }
-
         const lastSection = sections[sections.length - 1]
-        const lastSectionKey = this.getSectionKey(lastSection)
+        const lastSectionKey = FormKitFactory.instance.getSectionKey(lastSection)
         lastSection[lastSectionKey].push(submit)
-        formWrapper.children.push(...this.ConvertSections(sections))
+        formWrapper.children.push(...FormKitFactory.instance.ConvertSections(sections))
+        FormKitFactory.instance.forms[options.title.toLowerCase()] = formWrapper
         return formWrapper
     }
 

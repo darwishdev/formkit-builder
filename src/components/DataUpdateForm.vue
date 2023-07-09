@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { inject } from 'vue'
-// import LoadingForm from './LoadingForm.vue';
-// import ErrorForm from './ErrorForm.vue';
+import LoadingForm from './LoadingForm.vue';
+import ErrorForm from './ErrorForm.vue';
 import type { FormKitSection, FormKitOptions, ToastServiceMethods, FormSubmitHandler, FormFindDataHandler } from "../types";
 import { useDataFetcherFind } from 'vue-data-fetcher'
 import FormKitFactory from "@/factory/FormKitFactory"

@@ -58,7 +58,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "vue-data-fetcher": "^0.1.2",
+    "vue-data-fetcher": "^0.1.2"
   },
   "peerDependencies": {
     "@formkit/icons": "latest",

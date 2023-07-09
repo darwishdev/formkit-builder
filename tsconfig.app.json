@@ -3,6 +3,7 @@
   "include": [
     "vite-env.d.ts",
     "src/**/*",
+    "src/**/*.ts",
     "src/**/*.vue"
   ],
   "exclude": [

@@ -1,15 +1,9 @@
+<script setup lang="ts">
+</script>
+
 <template>
   <div class="create">
     <h1>create</h1>
+    <FormKit type="text" label="name" />
   </div>
 </template>
-
-<style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
-}
-</style>

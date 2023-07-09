@@ -12,8 +12,10 @@ import Toast from 'primevue/toast';
       </nav>
     </div>
   </header>
+  <div class="page-content">
+    <RouterView />
 
-  <RouterView />
+  </div>
   <toast>
     <template #message="slotProps">
       <div class="flex toast-inner flex-column align-items-center" style="flex: 1">
@@ -26,3 +28,9 @@ import Toast from 'primevue/toast';
     </template>
   </toast>
 </template>
+
+<style>
+.page-content {
+  padding: 20px;
+}
+</style>

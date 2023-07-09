@@ -1,0 +1,72 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  position: relative;
+  font-weight: normal;
+}
+
+body {
+  min-height: 100%;
+  background: var(--color-background);
+  transition: color 0.5s, background-color 0.5s;
+  line-height: 1.6;
+  font-family: var(--font-family);
+  color: var(--color-text);
+  font-size: 14px;
+  text-rendering: optimizeLegibility;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  & h1,
+  h2,
+  h3,
+  label {
+    color: var(--color-white);
+  }
+  a {
+    text-decoration: none;
+  }
+  & main.page-content {
+    padding: 10px;
+  }
+  & .card {
+    background-color: var(--color-card);
+    padding: 16px;
+    border-radius: 6px;
+  }
+
+  & .loading {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.slide-fade-enter-active {
+  transition: all 0.2s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+
+.bg-card {
+  background-color: var(--color-card);
+}
+hr {
+  background: var(--color-card);
+  color: var(--color-card);
+}

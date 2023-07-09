@@ -1,0 +1,34 @@
+:root {
+  --color-background: linear-gradient(180deg, #2e323f 0%, #0a061a 100%);
+  --color-dropdown: #2e323f;
+  --color-primary: #c94b63;
+  --color-input-border: 1px solid transparent;
+  --color-input: rgba(255, 255, 255, 0.05);
+  --color-card: rgba(255, 255, 255, 0.05);
+  --color-icon-btn: rgba(255, 255, 255, 0.05);
+  --color-hover: rgba(255, 255, 255, 0.07);
+  --color-hover-darken: rgba(255, 255, 255, 0.09);
+  --color-head: #fff;
+  --color-white: #fff;
+  --color-text: #868c9b;
+  --color-deleted: #8b8a8b;
+  --fk-color-input: var(--color-white);
+  --fk-margin-help: 15px 0;
+  --fk-color-help: var(--color-white);
+  --fk-bg-input: rgba(108, 117, 125, 0.2);
+  --fk-padding-label: 15px 0;
+  --fk-max-width-input: 100%;
+  --fk-font-size-message: 16px;
+  --fk-font-size-label: 16px;
+  --fk-color-tag: #256029;
+  --fk-color-tag-background: #c8e6c9;
+  --fk-border-width: 0;
+  --color-dialog: #252636;
+  --color-success: #0c7040;
+  --color-warning: #fc8621;
+  --color-error: #c72c41;
+  --menu-width-opened: 19rem;
+  --menu-width-closed: 6.571em;
+  --menu-border-color: rgba(22, 22, 22, 0.85);
+  --effect-image: url('@/assets/effect-ondark.png');
+}

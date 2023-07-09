@@ -1,0 +1,1 @@
+export { default as DataCreateForm } from './DataCreateForm.vue'

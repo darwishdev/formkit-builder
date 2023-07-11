@@ -33,6 +33,16 @@ const sections: FormKitSection[] = [
         placeholder: t('roleDescriptionPlaceholder'),
         validation: '',
       },
+      {
+        $formkit: 'taglist',
+        outerClass: "col-12",
+        closeOnSelect: false,
+        name: 'userRoles',
+        label: 'roles',
+        placeholder: 'roles',
+        options: apiClient.getRolesInput
+        // validation: 'required',
+      }
     ],
   },
 ]

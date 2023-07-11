@@ -1,3 +1,4 @@
+import type { FormKitSelectOptions } from '@/types/index';
 import type {
     RoleCreateResponse, ApiClient, RoleCreateRequest, RoleUpdateRequest, RoleUpdateResponse, RoleFindRequest, RoleFindResponse
 } from './ApiTypes'
@@ -47,10 +48,25 @@ export const roleFindResponse: RoleFindResponse = {
     roleUsers: 0,
     rolePermissions: 5
 };
+
+export const rolesInputOptions: FormKitSelectOptions[] = [
+    { label: 'Admin', value: 1 },
+    { label: 'Chef', value: 2 },
+    { label: 'Cashier', value: 3 },
+    { label: 'Waiter', value: 4 }
+]
 const apiClient: ApiClient = {
     roleCreate: async (req: RoleCreateRequest): Promise<RoleCreateResponse> => {
         await new Promise((resolve) => setTimeout(resolve, 1000));
         return roleCreateResponse;
+    },
+    getRolesInput: async (): Promise<FormKitSelectOptions[]> => {
+        await new Promise((resolve) => setTimeout(resolve, 100));
+        return rolesInputOptions;
+    },
+    getRolesInputWithErr: async (): Promise<FormKitSelectOptions[]> => {
+        await new Promise((resolve) => setTimeout(resolve, 100));
+        throw new Error("error")
     },
     roleCreateWithErr: async (req: RoleCreateRequest): Promise<RoleCreateResponse> => {
         await new Promise((resolve) => setTimeout(resolve, 1000));

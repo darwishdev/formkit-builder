@@ -1,3 +1,4 @@
+import type { FormKitSelectOptions } from '@/types/index';
 
 export interface Role {
     roleId: number;
@@ -55,4 +56,6 @@ export interface ApiClient {
     roleUpdateWithGlobalErr: (req: RoleUpdateRequest) => Promise<RoleUpdateResponse>
     roleFind: (req: RoleFindRequest) => Promise<RoleFindResponse>
     roleFindWithErr: (req: RoleFindRequest) => Promise<RoleFindResponse>
+    getRolesInput: () => Promise<FormKitSelectOptions[]>
+    getRolesInputWithErr: () => Promise<FormKitSelectOptions[]>
 }

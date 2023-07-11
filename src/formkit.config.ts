@@ -7,8 +7,22 @@ import '@formkit/pro/genesis'
 
 const pro = createProPlugin(import.meta.env.VITE_FORMKIT_TOKEN, inputs)
 
+
+
+function loadSelectOptions(node: any) {
+    node.on('created', () => {
+        const hasOptions = typeof node.props.options != 'undefined';
+        if (hasOptions) {
+            // node.props.options().then(res => {
+            //     console.log(res)
+            // })
+            // node.props.attrs.optionsGetter().then((res: any) => node.props.options = res)
+        }
+    })
+}
+
 const config: DefaultConfigOptions = {
-    plugins: [pro],
+    plugins: [pro, loadSelectOptions],
     icons: { ...genesisIcons },
 
 }

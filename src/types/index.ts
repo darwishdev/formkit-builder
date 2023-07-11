@@ -68,7 +68,7 @@ export type TextFormKitInput = {
 }
 export type FormKitSelectOptions = {
     value: number
-    lable: string
+    label: string
 }
 export type SelectFormKitInput = {
     $formkit: string
@@ -77,8 +77,8 @@ export type SelectFormKitInput = {
     name: string
     validation?: string,
     props?: Object,
-    options?: Array<FormKitSelectOptions>
-    optionsGetter?: (req: Object) => Promise<any>;
+    closeOnSelect?: boolean
+    options?: () => Promise<FormKitSelectOptions[]> | FormKitSelectOptions[]
     optionsPop?: string
     label?: string
     placeholder?: string

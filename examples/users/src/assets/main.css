@@ -1,0 +1,23 @@
+
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;400&display=swap');
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: "Cairo";
+
+  font-weight: normal;
+  padding-top: 100px;
+}
+
+
+
+nav{
+  background-color: var(--color-card);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 64px;
+  border-radius:  0  0 20px 20px ;
+}

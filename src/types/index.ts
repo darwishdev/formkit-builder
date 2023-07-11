@@ -122,6 +122,11 @@ export interface FormFindDataHandler<Req, Res, TargetResponse> {
     findRequerPropertyName: string;
     mapFunction?: (response: Res) => TargetResponse;
 }
+export interface FormKitToastHandler {
+    hideToast?: boolean
+    title?: String
+    message?: String
+}
 export interface FormSubmitHandler<Req, TargetRequest, Res> {
     submit: (req: TargetRequest) => Promise<Res>;
     indentifierPropertyName?: string;
@@ -131,7 +136,8 @@ export interface FormSubmitHandler<Req, TargetRequest, Res> {
 }
 export interface FormKitOptions {
     title: string;
-    allowBulkDelete: boolean;
+    allowBulkDelete?: boolean;
+    showHeaderSubmit?: boolean;
 }
 export type FormKitSubmit = {
     $formkit: string

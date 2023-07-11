@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { FormKitSection, FormKitError, FormKitOptions, FormSubmitHandler, FormFindDataHandler } from '@/types'
+import type { FormKitSection, FormKitError, FormKitToastHandler, FormKitOptions, FormSubmitHandler, FormFindDataHandler } from '@/types'
 import type { RoleUpdateRequest, RoleUpdateResponse, RoleFindRequest, RoleFindResponse } from '@/api/ApiTypes';
 import apiClient from '@/api/ApiMock';
 import { useI18n } from 'vue-i18n';
@@ -30,16 +30,21 @@ const sections: FormKitSection[] = [
         label: t('roleDescriptionLabel'),
         placeholder: t('roleDescriptionPlaceholder'),
         validation: '',
-      },
+      }
     ],
   },
 ]
 const options: FormKitOptions = {
-  title: "role_Update",
+  title: "role_update",
   allowBulkDelete: false,
 }
+
+
+const toastHandler: FormKitToastHandler = {
+  hideToast: true
+}
 const submitHandler: FormSubmitHandler<RoleUpdateRequest, RoleUpdateRequest, RoleUpdateResponse> = {
-  submit: apiClient.roleUpdateWithGlobalErr,
+  submit: apiClient.roleUpdate,
   errorHandler,
   redirectRoute,
 }
@@ -51,6 +56,6 @@ const findDataHandler: FormFindDataHandler<RoleFindRequest, RoleFindResponse, an
 </script>
 
 <template>
-  <data-update-form :sections="sections" :findDataHandler="findDataHandler" :submitHandler="submitHandler"
-    :options="options" />
+  <data-update-form :sections="sections" :toastHandler="toastHandler" :findDataHandler="findDataHandler"
+    :submitHandler="submitHandler" :options="options" />
 </template>

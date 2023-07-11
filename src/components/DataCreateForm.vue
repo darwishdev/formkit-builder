@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { inject } from "vue";
-import type { FormKitSection, FormKitOptions, ToastServiceMethods, FormSubmitHandler } from "../types";
+import type { FormKitSection, FormKitOptions, ToastServiceMethods, FormKitToastHandler, FormSubmitHandler } from "../types";
 import FormKitFactory from "@/factory/FormKitFactory"
 import { useRouter } from 'vue-router'
 import type { I18n } from "vue-i18n/dist/vue-i18n.js";
+import { handleSuccessToast } from '@/components/shared/FormHelpers'
 const router = useRouter();
 const useToast = inject("useToast") as () => ToastServiceMethods;
 const toast = useToast()
@@ -22,6 +23,10 @@ const props = defineProps({
     submitHandler: {
         type: Object as () => FormSubmitHandler<any, any, any>,
         required: true,
+    },
+    toastHandler: {
+        type: Object as () => FormKitToastHandler,
+        required: false,
     }
 });
 
@@ -39,7 +44,7 @@ const submitHandler = async (req: any, node: any) => {
     await new Promise((resolve) => {
         handler.submit(req)
             .then(() => {
-                toast.add({ severity: 'success', summary: t('role_create_summary'), detail: t('role_create_message'), life: 3000 });
+                handleSuccessToast(props.toastHandler, toast, t, props.options.title)
                 if (!req.stayOnSamePageAfterSuccess) {
                     router.push({ name: handler.redirectRoute })
                     resolve(null)
@@ -52,7 +57,7 @@ const submitHandler = async (req: any, node: any) => {
             }).catch((error: any) => {
                 const message = error.message.split(' ')[1]
                 if (message == 'internalServerError') {
-                    toast.add({ severity: 'error', summary: 'error_summary', detail: 'internalServerError', life: 3000 });
+                    toast.add({ severity: 'error', summary: t('internalServerErrorTitle'), detail: t('internalServerErrorMessage'), life: 3000 });
                 } else {
                     if (handler.errorHandler[message]) {
                         node.setErrors(

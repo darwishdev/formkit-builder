@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { FormKitSection, FormKitError, FormKitOptions, FormSubmitHandler } from '@/types'
+import type { FormKitSection, FormKitToastHandler, FormKitError, FormKitOptions, FormSubmitHandler } from '@/types'
 import type { RoleCreateRequest, RoleCreateResponse } from '@/api/ApiTypes';
 import apiClient from '@/api/ApiMock';
 import { useI18n } from 'vue-i18n';
@@ -46,9 +46,13 @@ const sections: FormKitSection[] = [
     ],
   },
 ]
+
+const toastHandler: FormKitToastHandler = {
+  hideToast: false
+}
+
 const options: FormKitOptions = {
   title: "role_create",
-  allowBulkDelete: true,
 }
 const submitHandler: FormSubmitHandler<RoleCreateRequest, RoleCreateRequest, RoleCreateResponse> = {
   submit: apiClient.roleCreate,
@@ -58,5 +62,5 @@ const submitHandler: FormSubmitHandler<RoleCreateRequest, RoleCreateRequest, Rol
 </script>
 
 <template>
-  <data-create-form :sections="sections" :submitHandler="submitHandler" :options="options" />
+  <data-create-form :sections="sections" :submitHandler="submitHandler" :toastHandler="toastHandler" :options="options" />
 </template>

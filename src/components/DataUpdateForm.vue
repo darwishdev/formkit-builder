@@ -2,11 +2,12 @@
 import { inject } from 'vue'
 import LoadingForm from './LoadingForm.vue';
 import ErrorForm from './ErrorForm.vue';
-import type { FormKitSection, FormKitOptions, ToastServiceMethods, FormSubmitHandler, FormFindDataHandler } from "../types";
+import type { FormKitSection, FormKitOptions, FormKitToastHandler, ToastServiceMethods, FormSubmitHandler, FormFindDataHandler } from "../types";
 import { useDataFetcherFind } from 'vue-data-fetcher'
 import FormKitFactory from "@/factory/FormKitFactory"
 import { useRoute, useRouter } from 'vue-router'
 import type { I18n } from 'vue-i18n/dist/vue-i18n.js';
+import { handleSuccessToast } from '@/components/shared/FormHelpers'
 const { push } = useRouter();
 const useToast = inject("useToast") as () => ToastServiceMethods;
 const toast = useToast()
@@ -31,6 +32,10 @@ const props = defineProps({
         type: Object as () => FormFindDataHandler<any, any, any>,
         required: true,
     },
+    toastHandler: {
+        type: Object as () => FormKitToastHandler,
+        required: false,
+    }
 });
 
 const log = console.log
@@ -51,7 +56,7 @@ const submitHandler = async (req: any, node: any) => {
         handler.submit(req)
             .then(() => {
                 node.clearErrors()
-                toast.add({ severity: 'success', summary: t('role_update_summary'), detail: t('role_update_message'), life: 3000 });
+                handleSuccessToast(props.toastHandler, toast, t, props.options.title)
                 push({ name: handler.redirectRoute })
                 resolve(null)
             }).catch((error: any) => {

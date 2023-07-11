@@ -2,15 +2,21 @@
 
 import type FormKitFactoryInterface from '@/types/index';
 import type { FormKitOptions, FormKitSection, FormKitSectionOutput, FormKitSpacer, FormKitHr, FormKitHeader, FormKitFlex, FormKitInput, FormKitSubmit, FormKitWraper, FormKitTitle, FormKitLoading } from '@/types/index'
-import i18n from '@/locales/i18n';
-const { t } = i18n.global
+// import i18n from '@/locales/i18n';
+import type { I18n } from 'vue-i18n/dist/vue-i18n.js';
+// const { t } = i18n.global
 
 export class FormKitFactory implements FormKitFactoryInterface {
     private static instance: FormKitFactory;
     // isType = <Type>(thing: any): thing is Type => true;
     forms = {} as any
+    t = null as any
     private constructor() {
         // Private constructor to prevent instantiation
+    }
+
+    InitTranslation(i18n: I18n): void {
+        this.t = i18n.global.t
     }
     CreateSectionOutput(section: FormKitSection): FormKitSectionOutput {
         const title = this.getSectionKey(section)
@@ -60,7 +66,7 @@ export class FormKitFactory implements FormKitFactoryInterface {
         const submit: FormKitSubmit = {
             $formkit: 'submit',
             outerClass: "m-0 w-full",
-            label: t("submit"),
+            label: this.t("submit"),
 
         }
         return submit
@@ -83,7 +89,7 @@ export class FormKitFactory implements FormKitFactoryInterface {
             attrs: {
                 class: 'mx-2'
             },
-            children: t(title)
+            children: this.t(title)
         }
         return formTitle
     }
@@ -100,10 +106,10 @@ export class FormKitFactory implements FormKitFactoryInterface {
         const stayHereToggle: FormKitInput = {
             $formkit: "toggle",
             outerClass: "mb-0 mx-4",
-            label: t("stayOnSamePageAfterSuccess"),
+            label: this.t("stayOnSamePageAfterSuccess"),
             name: "stayOnSamePageAfterSuccess"
         }
-        const submit = FormKitFactory.instance.getSubmit()
+        const submit = options.showHeaderSubmit ? FormKitFactory.instance.getSubmit() : {}
         const title: FormKitTitle = FormKitFactory.instance.getTitle(options.title)
         const header: FormKitHeader =
             [
@@ -154,6 +160,7 @@ export class FormKitFactory implements FormKitFactoryInterface {
         }
         return FormKitFactory.instance;
     }
+
 }
 
 

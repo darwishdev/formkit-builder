@@ -1,7 +1,7 @@
 # FormKit-builder 
 
 ## Introduction 
-Introducing Formkit Builder, a Vue 3 package designed to streamline your form management. This package serves as a comprehensive wrapper for Formkit forms, enhancing your form experience with features such as seamless loading handling, superior error management, and efficient API calls. By just passing a sections object, a submit handler, and form options, you can effortlessly create ready-to-use forms. 
+Introducing Formkit Builder, a Vue 3 package designed to streamline your form management. This package serves as a comprehensive wrapper for Formkit forms, enhancing your form experience with features such as seamless loading handling, superior error management, handle toast notifications appearance and efficient API calls. By just passing a sections object, a submit handler, and form options, you can effortlessly create ready-to-use forms. 
 
 This package significantly leverages the capabilities of the Formkit library. A thorough understanding of the Formkit library will enable you to utilize the Formkit Builder package to its full potential. For a comprehensive guide on Formkit, we recommend referring to the Formkit library's documentation [insert Formkit library link here]. Familiarize yourself with Formkit to optimize your use of the Formkit Builder package.
 
@@ -199,37 +199,45 @@ const errorHandler: Record<string, FormKitError> = {
 }
 const redirectRoute: string = 'list'
 const sections: FormKitSection[] = [
-  {
-    roleInfo: [
-      {
-        $formkit: 'text',
-        outerClass: "col-4",
-        name: 'roleName',
-        label: t('roleNameLabel'),
-        placeholder: t('roleNamePlaceholder'),
-        validation: 'required|length:3',
-
-      },
-      {
-        $formkit: 'textarea',
-        outerClass: "col-8",
-        name: 'roleDescription',
-        label: t('roleDescriptionLabel'),
-        placeholder: t('roleDescriptionPlaceholder'),
-        validation: '',
-      }
-    ],
-  },
+    {
+        roleInfo: [
+            {
+                $formkit: 'text',
+                outerClass: "col-4",
+                name: 'roleName',
+                label: 'roleNameLabel',
+                placeholder: 'roleNamePlaceholder',
+                validation: 'required|length:3',
+            },
+            {
+                $formkit: 'textarea',
+                outerClass: "col-8",
+                name: 'roleDescription',
+                label: 'roleDescriptionLabel',
+                placeholder: 'roleDescriptionPlaceholder',
+                validation: '',
+            },
+        ],
+    },
+    {
+        permissions: [
+            {
+                $cmp: 'FormKit',
+                props: {
+                    outerClass: "w-full",
+                    type: 'permissions',
+                    name: 'permissions',
+                    permissions: permissions
+                }
+            }
+        ],
+    }
 ]
 const options: FormKitOptions = {
   title: "role_update",
   allowBulkDelete: false,
 }
 
-
-const toastHandler: FormKitToastHandler = {
-  hideToast: true
-}
 const submitHandler: FormSubmitHandler<RoleUpdateRequest, RoleUpdateRequest, RoleUpdateResponse> = {
   submit: apiClient.roleUpdate,
   errorHandler,
@@ -243,10 +251,11 @@ const findDataHandler: FormFindDataHandler<RoleFindRequest, RoleFindResponse, an
 </script>
 
 <template>
-  <data-update-form :sections="sections" :toastHandler="toastHandler" :findDataHandler="findDataHandler"
+  <data-update-form :sections="sections" :findDataHandler="findDataHandler"
     :submitHandler="submitHandler" :options="options" />
 </template>
 ```
+!['data-update-form example output'](./src/assets/data-update-form%20example.gif)
 
 
 

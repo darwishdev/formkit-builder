@@ -3,7 +3,7 @@
 ## Introduction 
 Introducing Formkit Builder, a Vue 3 package designed to streamline your form management. This package serves as a comprehensive wrapper for Formkit forms, enhancing your form experience with features such as seamless loading handling, superior error management, handle toast notifications appearance and efficient API calls. By just passing a sections object, a submit handler, and form options, you can effortlessly create ready-to-use forms. 
 
-This package significantly leverages the capabilities of the Formkit library. A thorough understanding of the Formkit library will enable you to utilize the Formkit Builder package to its full potential. For a comprehensive guide on Formkit, we recommend referring to the Formkit library's documentation [insert Formkit library link here]. Familiarize yourself with Formkit to optimize your use of the Formkit Builder package.
+This package significantly leverages the capabilities of the Formkit library. A thorough understanding of the Formkit library will enable you to utilize the Formkit Builder package to its full potential. For a comprehensive guide on Formkit, we recommend referring to the Formkit library's documentation `https://formkit.com/getting-started/what-is-formkit`. Familiarize yourself with Formkit to optimize your use of the Formkit Builder package.
 
 ## Installation: 
 To install Formkit Builder, use the following command in your terminal: `npm i formkit-builder`. This will add the package to your project, equipping it with the advanced form management capabilities that Formkit Builder provides.

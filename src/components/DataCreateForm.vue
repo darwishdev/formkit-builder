@@ -2,9 +2,9 @@
 import { inject } from "vue";
 import type { FormKitSection, FormKitOptions, ToastServiceMethods, FormKitToastHandler, FormSubmitHandler } from "../types";
 import FormKitFactory from "@/factory/FormKitFactory"
-import { useRouter } from 'vue-router'
 import type { I18n } from "vue-i18n/dist/vue-i18n.js";
-import { handleSuccessToast } from '@/components/shared/FormHelpers'
+import { handleSuccessToast, handleError } from '@/components/shared/FormHelpers'
+import { useRouter } from 'vue-router'
 const router = useRouter();
 const useToast = inject("useToast") as () => ToastServiceMethods;
 const toast = useToast()
@@ -43,31 +43,21 @@ const submitHandler = async (req: any, node: any) => {
 
     await new Promise((resolve) => {
         handler.submit(req)
-            .then(() => {
+            .then(async (res: any) => {
+                node.reset()
+
+                if (handler.submitCallBack) await handler.submitCallBack(res)
                 handleSuccessToast(props.toastHandler, toast, t, props.options.title)
                 if (!req.stayOnSamePageAfterSuccess) {
-                    router.push({ name: handler.redirectRoute })
+                    if (handler.redirectRoute) router.push({ name: handler.redirectRoute })
                     resolve(null)
                     return
                 }
-                node.reset()
                 node.clearErrors()
                 node.input({ stayOnSamePageAfterSuccess: true });
                 resolve(null)
             }).catch((error: any) => {
-                const message = error.message.split(' ')[1]
-                if (message == 'internalServerError') {
-                    toast.add({ severity: 'error', summary: t('internalServerErrorTitle'), detail: t('internalServerErrorMessage'), life: 3000 });
-                } else {
-                    if (handler.errorHandler[message]) {
-                        node.setErrors(
-                            [],
-                            handler.errorHandler[message]
-                        )
-                    } else {
-                        node.setErrors([error.message])
-                    }
-                }
+                handleError(error, node, toast, handler.errorHandler, t)
                 resolve(null)
             })
     })

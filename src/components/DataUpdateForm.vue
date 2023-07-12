@@ -7,7 +7,8 @@ import { useDataFetcherFind } from 'vue-data-fetcher'
 import FormKitFactory from "@/factory/FormKitFactory"
 import { useRoute, useRouter } from 'vue-router'
 import type { I18n } from 'vue-i18n/dist/vue-i18n.js';
-import { handleSuccessToast } from '@/components/shared/FormHelpers'
+import { handleSuccessToast, handleError } from '@/components/shared/FormHelpers'
+import type { FormKitNode } from "@formkit/core"
 const { push } = useRouter();
 const useToast = inject("useToast") as () => ToastServiceMethods;
 const toast = useToast()
@@ -46,7 +47,7 @@ const formSchema = FormKitFactory.CreateForm(props.options, props.sections) as a
 type ResponseType = ReturnType<typeof props.findDataHandler.findData>;
 type RequestType = Record<string, number>
 const { responseData, loading, error } = useDataFetcherFind<RequestType, ResponseType>(props.findDataHandler.findData, props.findDataHandler.findRequerPropertyName, props.findDataHandler.mapFunction);
-const submitHandler = async (req: any, node: any) => {
+const submitHandler = async (req: any, node: FormKitNode) => {
     const handler = props.submitHandler
     if (handler.mapFunction) {
         req = handler.mapFunction(req)
@@ -54,26 +55,16 @@ const submitHandler = async (req: any, node: any) => {
     req[handler.indentifierPropertyName!] = parseInt(params.id as string)
     await new Promise((resolve) => {
         handler.submit(req)
-            .then(() => {
+            .then(async (res: any) => {
                 node.clearErrors()
+                node.reset()
                 handleSuccessToast(props.toastHandler, toast, t, props.options.title)
-                push({ name: handler.redirectRoute })
+                if (handler.redirectRoute) push({ name: handler.redirectRoute })
+
+                if (handler.submitCallBack) await handler.submitCallBack(res)
                 resolve(null)
             }).catch((error: any) => {
-                const message = error.message.split(' ')[1]
-                if (message == 'internalServerError') {
-                    toast.add({ severity: 'error', summary: t('error_summary'), detail: t('internalServerError'), life: 3000 });
-                } else {
-                    if (handler.errorHandler[message]) {
-                        node.setErrors(
-                            [],
-                            handler.errorHandler[message]
-                        )
-                    } else {
-                        node.setErrors([message])
-                    }
-
-                }
+                handleError(error, node, toast, handler.errorHandler, t)
 
                 resolve(null)
             })

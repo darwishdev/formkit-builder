@@ -129,10 +129,11 @@ export interface FormKitToastHandler {
 }
 export interface FormSubmitHandler<Req, TargetRequest, Res> {
     submit: (req: TargetRequest) => Promise<Res>;
+    submitCallBack?: (response: Res) => any;
     indentifierPropertyName?: string;
     errorHandler: Record<string, FormKitError>
     mapFunction?: (req: Req) => TargetRequest;
-    redirectRoute: any; // Modify the type to match your redirect route
+    redirectRoute?: string; // Modify the type to match your redirect route
 }
 export interface FormKitOptions {
     title: string;

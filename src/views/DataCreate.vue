@@ -3,6 +3,8 @@ import type { FormKitSection, FormKitToastHandler, FormKitError, FormKitOptions,
 import type { RoleCreateRequest, RoleCreateResponse } from '@/api/ApiTypes';
 import apiClient from '@/api/ApiMock';
 import { useI18n } from 'vue-i18n';
+import { useRouter } from 'vue-router'
+const router = useRouter();
 // import { sections, errorHandler, redirectRoute } from './forms/RoleCreateForm'
 
 
@@ -53,11 +55,15 @@ const toastHandler: FormKitToastHandler = {
 
 const options: FormKitOptions = {
   title: "role_create",
+  allowBulkDelete: false,
 }
 const submitHandler: FormSubmitHandler<RoleCreateRequest, RoleCreateRequest, RoleCreateResponse> = {
   submit: apiClient.roleCreate,
+  submitCallBack: (res: any) => {
+    router.push({ name: "list" })
+  },
   errorHandler,
-  redirectRoute,
+  // redirectRoute,
 }
 </script>
 

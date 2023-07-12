@@ -8,7 +8,7 @@ import ToastService from 'primevue/toastservice';
 import router from './router'
 import PrimeVue from 'primevue/config'
 import { useToast } from "primevue/usetoast";
-import { useI18n } from 'vue-i18n';
+// import { useI18n } from 'vue-i18n';
 import FormkitBuilder from "./FormkitBuilder"
 import './assets/app.scss'
 const app = createApp(App)

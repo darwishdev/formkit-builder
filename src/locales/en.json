@@ -1,7 +1,9 @@
 {
     "roles_list": "roles list",
     "role_create": "New Role",
+    "clear_filters": "clear  filters",
     "new_role": "New Role",
+    "UserPhone_filter": "phone",
     "role_details": "Role Details",
     "role_create_success_toast_title": "role created",
     "role_create_success_toast_message": "role created successfully",

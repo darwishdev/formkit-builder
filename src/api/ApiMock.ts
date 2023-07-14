@@ -1,6 +1,6 @@
 import type { FormKitSelectOptions } from '@/types/index';
 import type {
-    RoleCreateResponse, ApiClient, RoleCreateRequest, RoleUpdateRequest, RoleUpdateResponse, RoleFindRequest, RoleFindResponse
+    RoleCreateResponse, ApiClient, RoleCreateRequest, RolesListResponse, RoleUpdateRequest, RoleUpdateResponse, RoleFindRequest, RoleFindResponse
 } from './ApiTypes'
 export const roleCreateRequest: RoleCreateRequest = {
     roleName: "head chef",
@@ -14,6 +14,31 @@ export const roleCreateResponse: RoleCreateResponse = {
         roleDescription: "head chef role"
     }
 
+};
+
+export const rolesListResponse: RolesListResponse = {
+    roles: [
+        {
+            roleId: 1,
+            roleName: "Admin",
+            roleUsers: 10,
+            rolePermissions: 20
+        },
+        {
+            roleId: 2,
+            roleName: "User",
+            roleUsers: 50,
+            rolePermissions: 30
+        }
+    ],
+    deleteRoles: [
+        {
+            roleId: 3,
+            roleName: "Guest",
+            roleUsers: 5,
+            rolePermissions: 10
+        }
+    ]
 };
 export const roleUpdateRequest: RoleUpdateRequest = {
     roleId: 1,
@@ -71,6 +96,15 @@ const apiClient: ApiClient = {
     roleCreateWithErr: async (req: RoleCreateRequest): Promise<RoleCreateResponse> => {
         await new Promise((resolve) => setTimeout(resolve, 1000));
         throw new Error("already_exists unique_constraint_roles_role_name_key")
+    },
+    rolesList: async (): Promise<RolesListResponse> => {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        return rolesListResponse;
+    },
+    rolesListWithErr: async (): Promise<RolesListResponse> => {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+
+        throw new Error('Failed to fetch roles list');
     },
     roleCreateWithGlobalErr: async (req: RoleCreateRequest): Promise<RoleCreateResponse> => {
         await new Promise((resolve) => setTimeout(resolve, 1000));

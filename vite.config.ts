@@ -3,13 +3,14 @@ import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import dts from 'vite-plugin-dts';
+import svgLoader from 'vite-svg-loader'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
-    dts({ include: ['src/components/DataCreateForm.vue', 'src/components/DataUpdateForm.vue', 'src/factory/*.ts', 'src/types/index.ts', "src/FormkitBuilder.ts"], })
-
+    dts({ include: ['src/components/DataCreateForm.vue', 'src/components/DataUpdateForm.vue', 'src/factory/*.ts', 'src/types/index.ts', "src/FormkitBuilder.ts"], }),
+    svgLoader()
   ],
   build: {
     cssCodeSplit: false,

@@ -7,6 +7,7 @@ import Toast from 'primevue/toast';
   <header>
     <div class="wrapper">
       <nav>
+        <RouterLink to="/">list</RouterLink>
         <RouterLink to="/create">Create</RouterLink>
         <RouterLink to="/update/1">Update</RouterLink>
       </nav>

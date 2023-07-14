@@ -47,7 +47,7 @@ const formSchema = FormKitFactory.CreateForm(props.options, props.sections) as a
 type ResponseType = ReturnType<typeof props.findDataHandler.findData>;
 type RequestType = Record<string, number>
 const { responseData, loading, error } = useDataFetcherFind<RequestType, ResponseType>(props.findDataHandler.findData, props.findDataHandler.findRequerPropertyName, props.findDataHandler.mapFunction);
-const submitHandler = async (req: any, node: FormKitNode) => {
+const submitHandler = async (req: any, node: any) => {
     const handler = props.submitHandler
     if (handler.mapFunction) {
         req = handler.mapFunction(req)

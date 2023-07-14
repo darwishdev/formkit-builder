@@ -1,9 +1,11 @@
 
 
 import type FormKitFactoryInterface from '@/types/index';
-import type { FormKitOptions, FormKitSection, FormKitSectionOutput, FormKitSpacer, FormKitHr, FormKitHeader, FormKitFlex, FormKitInput, FormKitSubmit, FormKitWraper, FormKitTitle, FormKitLoading } from '@/types/index'
+import type { FormKitComponent, FormKitOptions, FormKitElement, FormKitSection, FormKitSectionOutput, FormKitSpacer, FormKitHr, FormKitHeader, FormKitFlex, FormKitInput, FormKitSubmit, FormKitWraper, FormKitTitle, FormKitLoading } from '@/types/index'
+import type { FormKitSchemaDefinition } from '@formkit/core'
 // import i18n from '@/locales/i18n';
 import type { I18n } from 'vue-i18n/dist/vue-i18n.js';
+import { reset } from '@formkit/core'
 // const { t } = i18n.global
 
 export class FormKitFactory implements FormKitFactoryInterface {
@@ -132,6 +134,64 @@ export class FormKitFactory implements FormKitFactoryInterface {
     getSectionKey(section: FormKitSection): string {
         return Object.keys(section)[0]
     }
+    getClearIcon(callBack: any): FormKitElement {
+        return {
+            $el: 'div',
+            attrs: {
+                class: ' flex justify-content-end col-1 cursor-pointer',
+                onClick: callBack
+            },
+            children: [
+                {
+                    $cmp: 'FilterIcon',
+
+                    props: {
+                        severity: "remove",
+                        label: "clear_filters"
+                    },
+
+                },
+
+            ]
+
+        }
+
+    }
+    CreateFilterForm(inputs: Array<FormKitInput | FormKitComponent>, clearIcon: FormKitElement): FormKitSchemaDefinition {
+        return [
+            {
+                $el: 'div',
+                attrs: {
+                    class: ' flex justify-content-between align-items-center'
+                },
+                children: [
+                    //grid with inputs
+                    {
+                        $el: 'div',
+                        attrs: {
+                            class: 'grid col-11   mb-4'
+                        },
+                        children: inputs,
+
+                    },
+                    {
+                        $el: 'div',
+                        attrs: {
+                            class: ' flex justify-content-end col-1 cursor-pointer',
+                        },
+                        children: [
+                            clearIcon
+                        ]
+                    },
+                ],
+
+            },
+
+
+
+
+        ] as FormKitSchemaDefinition
+    }
     CreateForm(options: FormKitOptions, sections: FormKitSection[]): FormKitWraper {
         if (Object.keys(FormKitFactory.instance.forms).includes(options.title.toLowerCase())) {
             return FormKitFactory.instance.forms[options.title.toLowerCase()]
@@ -153,6 +213,8 @@ export class FormKitFactory implements FormKitFactoryInterface {
         FormKitFactory.instance.forms[options.title.toLowerCase()] = formWrapper
         return formWrapper
     }
+
+
 
     public static getInstance(): FormKitFactory {
         if (!FormKitFactory.instance) {

@@ -87,6 +87,11 @@ export type SelectFormKitInput = {
 }
 export type FormKitInput = TextFormKitInput | SelectFormKitInput
 
+export type FormKitElement = {
+    $el: string
+    attrs: Record<string, any>
+    children: any
+}
 export type FormKitSpacer = {
     $el: string
     attrs: Record<string, any>

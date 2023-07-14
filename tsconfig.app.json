@@ -13,6 +13,7 @@
   ],
   "compilerOptions": {
     "composite": true,
+    "noImplicitAny": false,
     "baseUrl": ".",
     "module": "ESNext",
     "paths": {

@@ -22510,7 +22510,12 @@
   --fk-font-size-message: 16px;
   --fk-font-size-label: 16px;
   --fk-color-tag: #256029;
+  --fk-day-bg: var(--color-card);
+  --fk-day-bg-hover: rgba(23,255,255,1)
+  // --fk-color-border-focus: red;
   --fk-color-tag-background: #c8e6c9;
+  --fk-day-bg-selected:var(--color-primary);
+  --fk-dropdown-active-bg:var(--color-primary);
   --fk-border-width: 0;
   --color-dialog: #252636;
   --color-success: #0c7040;
@@ -22645,6 +22650,28 @@
 .formkit-input:focus-visible,
 .formkit-input:focus-visible {
   outline: none !important;
+}
+
+[data-type=datepicker] .formkit-panel-wrapper {
+  background: var(--color-background);
+}
+
+[data-type=datepicker] button {
+  background-color: var(--color-card) !important;
+  color: var(--color-white);
+}
+
+[data-family=dropdown].formkit-outer .formkit-dropdown-wrapper ul {
+  background: var(--color-background);
+  color: var(--color-white);
+}
+
+[data-family=dropdown].formkit-outer .formkit-inner {
+  background-color: var(--color-card);
+}
+
+.formkit-selector {
+  color: var(--color-white);
 }
 
 *,

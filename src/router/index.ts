@@ -17,7 +17,7 @@ const router = createRouter({
       component: DataCreate
     },
     {
-      path: '/update/1',
+      path: '/update/:id',
       name: 'update',
       component: DataUpdate
     }

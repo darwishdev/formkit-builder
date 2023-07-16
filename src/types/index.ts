@@ -126,6 +126,7 @@ export interface FormFindDataHandler<Req, Res, TargetResponse> {
     findData: (req: Req) => Promise<Res>;
     findRequerPropertyName: string;
     mapFunction?: (response: Res) => TargetResponse;
+    reqValue?: number;
 }
 export interface FormKitToastHandler {
     hideToast?: boolean

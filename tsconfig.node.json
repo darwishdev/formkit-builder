@@ -10,7 +10,7 @@
   "compilerOptions": {
     "composite": true,
     "noImplicitAny": false,
-    "module": "ESNext",
+    "module": "NodeNext",
     "types": [
       "node"
     ]

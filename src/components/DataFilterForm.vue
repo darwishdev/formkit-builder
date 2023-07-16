@@ -5,10 +5,7 @@ import { reset } from '@formkit/core'
 import TimesIcon from '@/assets/times.svg'
 import FormKitFactory from "@/factory/FormKitFactory"
 import { debounce } from 'lodash'
-import { parseDate } from "./shared/FormHelpers";
-import type { FilterHandler } from './filter'
-import { inputTypes, DefaultInputFilter, ListInputFilter, DateInputFilter } from './filter'
-import { t } from "vue-i18n";
+import { inputTypes } from './filter'
 const props = defineProps({
     inputs: {
         type: Array as () => Array<FormKitInput | FormKitComponent>,
@@ -24,10 +21,11 @@ const formData = ref()
 const activeFilters = ref({})
 
 const clearAllFilters = () => {
-    console.log('clearFilers')
     reset('filter-form')
     emit('clearFilters')
     activeFilters.value = {}
+    // formData.value = {}
+
 }
 const schemaData = ref({
     clearAllFilters
@@ -52,11 +50,6 @@ function emitter(args: any, emitFunc: string = 'filter') {
 
 const updateFormValue = async (value: any, node: any) => {
     const keys = Object.keys(value)
-    // const updatedInputName = value.find(valueKey => {
-    //     console.log(valueKey)
-    //     return valueKey == 'roleName'
-    // })
-
     let i = 0
     for (const input of keys) {
         const isBinded = (typeof activeFilters.value[input] != 'undefined' && activeFilters.value[input].value == value[input])
@@ -72,44 +65,7 @@ const updateFormValue = async (value: any, node: any) => {
         activeFilters.value[input] = { key: input, value: currentInput.value, displayValue }
         return
     }
-    return
-    for (let i = 0; i < keys.length; i++) {
-        const currentIterationFilter = keys[i] as any
-        const currentValue = value[currentIterationFilter] as any
-        if (typeof currentValue == 'undefined') {
-            continue;
-        }
-        const currentInput = node.at(currentIterationFilter)
-        let currentDisplayValue = ""
 
-        console.log('currentInput')
-        console.log(currentInput.props.type)
-        if (currentInput && 'options' in currentInput.props) {
-            const valueLable = currentInput.props.options.find(option => option.value === `__mask_${currentValue}`).label
-            currentDisplayValue = valueLable
-        } else if (currentInput.props.type == 'datepicker') {
-            currentDisplayValue = parseDate(currentValue)
-        } else {
-
-            currentDisplayValue = currentValue;
-        }
-        const filterObject = { key: currentIterationFilter, value: currentDisplayValue }
-        const isBinded = (typeof activeFilters.value[currentIterationFilter] != 'undefined' && activeFilters.value[currentIterationFilter].value == currentDisplayValue)
-        if (isBinded) {
-            continue;
-        }
-        const activeFiltersKeys = Object.keys(activeFilters.value)
-        emitter({ key: currentIterationFilter, value: currentValue })
-        if (!activeFiltersKeys.includes(currentIterationFilter)) {
-            // this will execute while defining new filter as active filter
-            activeFilters.value[currentIterationFilter] = filterObject
-            break
-        }
-        // this will execute while reactivating input already defined as activeFilter
-        activeFilters.value[currentIterationFilter] = filterObject
-        // console.log(' show on reactive')
-        break
-    }
 }
 const removeFilter = (filter: keyof typeof formData.value) => {
     delete activeFilters.value[filter]
@@ -126,10 +82,15 @@ const removeFilter = (filter: keyof typeof formData.value) => {
     <div v-if="activeFilters" class="active-filters">
         <div class="filter" v-for="(filter, index) in Object.keys(activeFilters) " :key="index"
             @click.prevent="removeFilter(activeFilters[filter].key)">
-            <filter-icon />
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="none" viewBox="0 0 24 24">
+                <path stroke="#464455" stroke-linecap="round" stroke-linejoin="round"
+                    d="M18 7h-2m-3.5-2H6c-.471 0-.707 0-.854.146C5 5.293 5 5.53 5 6v1.965c0 .262 0 .393.06.503.058.11.167.184.385.329l3.024 2.015c.872.582 1.308.873 1.544 1.315.237.442.237.966.237 2.014V19l3.5-1.75v-3.11c0-1.047 0-1.571.237-2.013.133-.25.331-.452.636-.686M20 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+            </svg>
             <h3 class=""> <strong>{{ $t(`${activeFilters[filter].key}_filter`) }}</strong> : {{
                 activeFilters[filter].displayValue }} </h3>
-            <times-icon />
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="none" viewBox="0 0 24 24">
+                <path stroke="var(--color-white)" stroke-linecap="round" stroke-width="2" d="m16 8-8 8m0-8 8 8" />
+            </svg>
         </div>
     </div>
     <!-- <pre> {{ formData }}</pre> -->

@@ -8,12 +8,13 @@ import FormKitFactory from "@/factory/FormKitFactory"
 import { useRoute, useRouter } from 'vue-router'
 import type { I18n } from 'vue-i18n/dist/vue-i18n.js';
 import { handleSuccessToast, handleError } from '@/components/shared/FormHelpers'
-import type { FormKitNode } from "@formkit/core"
+// import type { FormKitNode } from "@formkit/core"
 const { push } = useRouter();
 const useToast = inject("useToast") as () => ToastServiceMethods;
 const toast = useToast()
 const i18n = inject("i18n") as I18n
 const { t } = i18n.global
+
 
 const { params } = useRoute()
 const props = defineProps({
@@ -46,7 +47,11 @@ const formSchema = FormKitFactory.CreateForm(props.options, props.sections) as a
 
 type ResponseType = ReturnType<typeof props.findDataHandler.findData>;
 type RequestType = Record<string, number>
-const { responseData, loading, error } = useDataFetcherFind<RequestType, ResponseType>(props.findDataHandler.findData, props.findDataHandler.findRequerPropertyName, props.findDataHandler.mapFunction);
+
+const requestValue = props.findDataHandler.reqValue ? props.findDataHandler.reqValue : parseInt(params.id as string)
+const req: RequestType = {}
+req[props.findDataHandler.findRequerPropertyName] = requestValue
+const { responseData, loading, error } = useDataFetcherFind<RequestType, ResponseType>(props.findDataHandler.findData, req);
 const submitHandler = async (req: any, node: any) => {
     const handler = props.submitHandler
     if (handler.mapFunction) {
@@ -72,6 +77,8 @@ const submitHandler = async (req: any, node: any) => {
 }
 </script>
 <template>
+    <h2>
+        {{ paramId }} assas</h2>
     <loading-form v-if="loading" />
     <error-form v-else-if="error" :error="error" />
     <FormKit v-else :value="responseData" type="form" @submit-invalid="log" :actions="false" @submit="submitHandler">

@@ -11,7 +11,7 @@
 .grid > .col,
 .grid > [class*=col] {
   box-sizing: border-box;
-}
+}a
 
 .grid-nogutter {
   -webkit-margin-end: 0;
@@ -22492,6 +22492,7 @@
   --color-input: rgba(255, 255, 255, 0.05);
   --color-card: rgba(255, 255, 255, 0.05);
   --color-icon-btn: rgba(255, 255, 255, 0.05);
+  --color-grey: #bdbdbd45;
   --color-hover: rgba(255, 255, 255, 0.07);
   --color-hover-darken: rgba(255, 255, 255, 0.09);
   --color-head: #fff;
@@ -22509,7 +22510,12 @@
   --fk-font-size-message: 16px;
   --fk-font-size-label: 16px;
   --fk-color-tag: #256029;
+  --fk-day-bg: var(--color-card);
+  --fk-day-bg-hover: rgba(23,255,255,1)
+  // --fk-color-border-focus: red;
   --fk-color-tag-background: #c8e6c9;
+  --fk-day-bg-selected:var(--color-primary);
+  --fk-dropdown-active-bg:var(--color-primary);
   --fk-border-width: 0;
   --color-dialog: #252636;
   --color-success: #0c7040;
@@ -22646,6 +22652,28 @@
   outline: none !important;
 }
 
+[data-type=datepicker] .formkit-panel-wrapper {
+  background: var(--color-background);
+}
+
+[data-type=datepicker] button {
+  background-color: var(--color-card) !important;
+  color: var(--color-white);
+}
+
+[data-family=dropdown].formkit-outer .formkit-dropdown-wrapper ul {
+  background: var(--color-background);
+  color: var(--color-white);
+}
+
+[data-family=dropdown].formkit-outer .formkit-inner {
+  background-color: var(--color-card);
+}
+
+.formkit-selector {
+  color: var(--color-white);
+}
+
 *,
 *::before,
 *::after {
@@ -22740,4 +22768,23 @@ nav a {
 
 .vh-50 {
   height: 50vh;
+}
+
+.active-filters {
+  display: flex;
+}
+.active-filters .filter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--color-grey);
+  border-radius: 30px;
+  cursor: pointer;
+  padding: 5px;
+  -webkit-margin-end: 20px;
+          margin-inline-end: 20px;
+}
+.active-filters .filter svg {
+  width: 30px;
+  height: 30px;
 }/*# sourceMappingURL=app.css.map */

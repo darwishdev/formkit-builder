@@ -126,6 +126,7 @@ const apiClient: ApiClient = {
     },
     roleFind: async (req: RoleFindRequest): Promise<RoleFindResponse> => {
         await new Promise((resolve) => setTimeout(resolve, 1000));
+        console.log(req)
         return roleFindResponse;
     },
     roleFindWithErr: async (req: RoleFindRequest): Promise<RoleFindResponse> => {

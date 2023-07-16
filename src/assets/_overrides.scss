@@ -124,3 +124,27 @@
 .formkit-input:focus-visible {
   outline: none !important;
 }
+
+[data-type='datepicker'] .formkit-panel-wrapper {
+  background: var(--color-background);
+}
+[data-type='datepicker'] button {
+  background-color: var(--color-card) !important;
+  color: var(--color-white);
+}
+[data-family='dropdown'].formkit-outer .formkit-dropdown-wrapper {
+  // background-color: black !important;
+
+  & ul {
+    background: var(--color-background);
+    color: var(--color-white);
+  }
+}
+[data-family='dropdown'].formkit-outer {
+  & .formkit-inner {
+    background-color: var(--color-card);
+  }
+}
+.formkit-selector {
+  color: var(--color-white);
+}

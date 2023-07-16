@@ -30,3 +30,19 @@ export const handleError = (error: any, node: FormKitNode, toast: ToastServiceMe
         }
     }
 }
+
+
+
+export const parseDate = (date: string): string => {
+    const dateValue = new Date(date);
+    const options: Intl.DateTimeFormatOptions = {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        timeZone: 'Africa/Cairo',
+    };
+    return dateValue.toLocaleString('en-US', options);
+}

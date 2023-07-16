@@ -19,6 +19,7 @@ export default defineConfig({
       formats: ["es", "cjs"],
       name: "FormkitBuilder",
       fileName: (format, entry) => {
+        // console.log(entry)
         return format === `es` ? `${entry}.js` : `${entry}.cjs`
       }
     },

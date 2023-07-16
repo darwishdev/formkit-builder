@@ -87,6 +87,8 @@ const apiClient: ApiClient = {
     },
     getRolesInput: async (): Promise<FormKitSelectOptions[]> => {
         await new Promise((resolve) => setTimeout(resolve, 100));
+        console.log("api hitttt")
+        console.log("getRolesInput")
         return rolesInputOptions;
     },
     getRolesInputWithErr: async (): Promise<FormKitSelectOptions[]> => {

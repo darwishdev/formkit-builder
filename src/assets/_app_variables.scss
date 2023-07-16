@@ -24,8 +24,13 @@
   --fk-font-size-message: 16px;
   --fk-font-size-label: 16px;
   --fk-color-tag: #256029;
+  --fk-day-bg: var(--color-card);
+  --fk-day-bg-hover : rgba(23,255,255,1)
   // --fk-color-border-focus: red;
   --fk-color-tag-background: #c8e6c9;
+  --fk-day-bg-selected:var(--color-primary);
+  --fk-dropdown-active-bg:var(--color-primary);
+  
   --fk-border-width: 0;
   --color-dialog: #252636;
   --color-success: #0c7040;

@@ -14,9 +14,6 @@ import FormkitBuilder from "./FormkitBuilder"
 import './assets/app.scss'
 const app = createApp(App)
 
-
-
-
 app.use(i18n).use(PrimeVue).use(FormkitBuilder, { useToast, i18n }).use(ToastService).use(plugin, defaultConfig(formKitConfig)).use(router)
 app.component("FilterIcon", FilterIcon)
 app.mount('#app')

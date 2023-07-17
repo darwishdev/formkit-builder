@@ -77,8 +77,6 @@ const submitHandler = async (req: any, node: any) => {
 }
 </script>
 <template>
-    <h2>
-        {{ paramId }} assas</h2>
     <loading-form v-if="loading" />
     <error-form v-else-if="error" :error="error" />
     <FormKit v-else :value="responseData" type="form" @submit-invalid="log" :actions="false" @submit="submitHandler">

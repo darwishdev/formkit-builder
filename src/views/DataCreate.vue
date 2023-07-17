@@ -4,6 +4,7 @@ import type { RoleCreateRequest, RoleCreateResponse } from '@/api/ApiTypes';
 import apiClient from '@/api/ApiMock';
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router'
+import permissions from '@/api/permissions'
 const router = useRouter();
 // import { sections, errorHandler, redirectRoute } from './forms/RoleCreateForm'
 
@@ -46,6 +47,21 @@ const sections: FormKitSection[] = [
         // validation: 'required',
       }
     ],
+  },
+  {
+
+    permissions: [
+      {
+        $cmp: 'FormKit',
+        props: {
+          outerClass: "w-full",
+          type: 'permissions',
+          name: 'permissions',
+          permissions
+        }
+      }
+    ],
+
   },
 ]
 

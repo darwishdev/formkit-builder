@@ -16,6 +16,7 @@
     "noImplicitAny": false,
     "baseUrl": ".",
     "moduleResolution": "node",
+    "allowJs": true,
     "module": "ESNext",
     "paths": {
       "@/*": [

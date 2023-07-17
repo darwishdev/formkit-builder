@@ -9,17 +9,17 @@ import svgLoader from 'vite-svg-loader'
 export default defineConfig({
   plugins: [
     vue(),
-    dts({ include: ['src/components/DataCreateForm.vue', 'src/components/DataUpdateForm.vue', 'src/factory/*.ts', 'src/types/index.ts', "src/FormkitBuilder.ts"], }),
+    dts({ include: ['src/components/DataCreateForm.vue', 'src/FormHelpers.ts', 'src/components/DataUpdateForm.vue', 'src/factory/*.ts', 'src/types/index.ts', "src/FormkitBuilder.ts"], }),
     svgLoader()
   ],
   build: {
     cssCodeSplit: false,
     lib: {
-      entry: ["./src/FormkitBuilder.ts", "./src/types/index.ts"],
+      entry: ["./src/FormkitBuilder.ts", "./src/types/index.ts", "./src/FormHelpers.ts"],
       formats: ["es", "cjs"],
       name: "FormkitBuilder",
       fileName: (format, entry) => {
-        // console.log(entry)
+        console.log(entry)
         return format === `es` ? `${entry}.js` : `${entry}.cjs`
       }
     },

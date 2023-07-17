@@ -5,6 +5,7 @@ import type { I18n } from "vue-i18n/dist/vue-i18n.js"
 import FormKitFactory from "@/factory/FormKitFactory"
 import { plugin, defaultConfig } from '@formkit/vue'
 import type { DefaultConfigOptions } from '@formkit/vue'
+import getWrappedConfig from './formkit.builder.config'
 
 
 
@@ -13,7 +14,7 @@ export default {
     install: (app: App, options: { useToast: () => ToastServiceMethods, i18n: I18n, formKitConfig: DefaultConfigOptions }) => {
         app.provide("useToast", options.useToast);
         app.provide("i18n", options.i18n);
-        app.use(plugin, defaultConfig(options.formKitConfig))
+        app.use(plugin, defaultConfig(getWrappedConfig(options.formKitConfig)))
         FormKitFactory.InitTranslation(options.i18n)
 
         Object.keys(components).forEach((key: string) => app.component(key, components[key as keyof typeof components]))

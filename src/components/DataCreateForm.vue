@@ -3,7 +3,7 @@ import { inject } from "vue";
 import type { FormKitSection, FormKitOptions, ToastServiceMethods, FormKitToastHandler, FormSubmitHandler } from "../types";
 import FormKitFactory from "@/factory/FormKitFactory"
 import type { I18n } from "vue-i18n/dist/vue-i18n.js";
-import { handleSuccessToast, handleError } from '@/components/shared/FormHelpers'
+import { handleSuccessToast, handleError } from '@/FormHelpers'
 import { useRouter } from 'vue-router'
 const router = useRouter();
 const useToast = inject("useToast") as () => ToastServiceMethods;

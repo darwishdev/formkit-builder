@@ -9,12 +9,9 @@ const pro = createProPlugin(import.meta.env.VITE_FORMKIT_TOKEN, inputs)
 
 
 
-function loadSelectOptions(node: any) {
-
-}
 
 const config: DefaultConfigOptions = {
-    plugins: [pro, loadSelectOptions],
+    plugins: [pro],
     icons: { ...genesisIcons },
 
 }

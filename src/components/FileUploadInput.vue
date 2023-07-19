@@ -89,8 +89,8 @@ const props = defineProps({
                 </rect>
             </svg>
         </div>
-        <div v-if="props.context._value" class="img-wrapper" @click.prevent="handleFileRemove">
-            <!-- {{ `${baseImage}${props.context._value}` }} -->
+        <div v-if="props.context._value && props.context._value.length > 0" class="img-wrapper"
+            @click.prevent="handleFileRemove">
             <img class="uploaded-img" :src="`${uploadHandler.baseImageUrl}${props.context._value}`"
                 :alt="props.context._value" />
             <div class="remove">

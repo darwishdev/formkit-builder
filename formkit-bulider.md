@@ -1,9 +1,19 @@
 # FormKit-builder 
 
+## Table of Contents
+1. [Introduction](#introduction)
+3. [Installation](#installation)
+4. [Usage](#usage)
+5. [data-create-form Component](#data-create-form)
+6. [data-update-form Component](#data-update-form) 
+7. [data-filter-form Component](#data-filter-form) 
+
+
 ## Introduction 
 Introducing Formkit Builder, a Vue 3 package designed to streamline your form management. This package serves as a comprehensive wrapper for Formkit forms, enhancing your form experience with features such as seamless loading handling, superior error management, handle toast notifications appearance and efficient API calls. By just passing a sections object, a submit handler, and form options, you can effortlessly create ready-to-use forms. 
 
-This package significantly leverages the capabilities of the Formkit library. A thorough understanding of the Formkit library will enable you to utilize the Formkit Builder package to its full potential. For a comprehensive guide on Formkit, we recommend referring to the Formkit library's documentation `https://formkit.com/getting-started/what-is-formkit`. Familiarize yourself with Formkit to optimize your use of the Formkit Builder package.
+This package significantly leverages the capabilities of the Formkit library. A thorough understanding of the Formkit library will enable you to utilize the Formkit Builder package to its full potential. For a comprehensive guide on Formkit, we recommend referring to the Formkit library's documentation [Formkit library's documentation](https://formkit.com/getting-started/what-is-formkit). Familiarize yourself with Formkit to optimize your use of the Formkit Builder package.
+
 
 ## Installation: 
 To install Formkit Builder, use the following command in your terminal: `npm i formkit-builder`. This will add the package to your project, equipping it with the advanced form management capabilities that Formkit Builder provides.
@@ -13,9 +23,9 @@ The package comprises two key components: `data-create-form` and `data-update-fo
 
 The `data-create-form` component is equipped with a range of props, which when used correctly, can help generate a form with multiple features. 
 
-**Props**
+## data-create-form
 
-## data-create-form component
+**Props**
 
 ### Sections Prop
 
@@ -39,7 +49,17 @@ The `data-create-form` component is equipped with a range of props, which when u
 
 ### Options Prop
 
-- **options (Required,Object)** : This props accepts an object which should include `title` , `allowBulkDelete` and `showHeaderSubmit` properties. `title` property is a string that represents the form title that will appear in the form header at the top of the page .. `allowBulkDelete` property is a boolean that determine if the form will include a bulk create switch button or not .. `showHeaderSubmit` property is a boolean that determines if the header submit button will appear or not , it's an optional property so if we didn't provide it a post form submit button only will appear Here's an example : 
+- **options (Required,Object : FormKitOptions)** : This props accepts an object of type `FormKitOptions` which should include `title` , `allowBulkDelete` and `showHeaderSubmit` properties. Here's the implementation of the `FormKitOptions` type : 
+
+```
+export interface FormKitOptions {
+    title: string;
+    allowBulkDelete?: boolean;
+    showHeaderSubmit?: boolean;
+}
+```
+
+`title` property is a string that represents the form title that will appear in the form header at the top of the page .. `allowBulkDelete` property is a boolean that determine if the form will include a bulk create switch button or not .. `showHeaderSubmit` property is a boolean that determines if the header submit button will appear or not , it's an optional property so if we didn't provide it a post form submit button only will appear. Here's an example : 
 
 ```
 const options: FormKitOptions = {
@@ -52,16 +72,28 @@ const options: FormKitOptions = {
 ### SubmitHandler Prop
 
 
-- **submitHandler (Required, Object)**: This prop is crucial for managing the function that executes post form submission. The object should comprise the following properties:
+- **submitHandler (Required, Object)**: This required prop is crucial for managing the function that executes post form submission. The object should match the `FormSubmitHandler` type which comprise the following properties:
 
-  -- **submit (Required,function)**: This property signifies the API endpoint function used for dispatching the form data. for example :
+```
+export interface FormSubmitHandler<Req, TargetRequest, Res> {
+    submit: (req: TargetRequest) => Promise<Res>;
+    submitCallBack?: (response: Res) => any;
+    indentifierPropertyName?: string;
+    errorHandler: Record<string, FormKitError>
+    mapFunction?: (req: Req) => TargetRequest;
+    redirectRoute?: string; // Modify the type to match your redirect route
+}
+
+```
+
+  - **submit (Required,function)**: This property signifies the API endpoint function used for dispatching the form data. for example :
   
 ```
 submit: apiClient.roleCreate
 
 ```
 
-  --**submitCallBack (Optional,function)**: This property signifies an optional function that can be employed post the submit function (API) to manipulate the response or execute some logic. Here's an example : 
+  - **submitCallBack (Optional,function)**: This optional property signifies an optional function that can be employed post the submit function (API) to manipulate the response or execute some logic. Here's an example : 
 
 ``` 
  submitCallBack: (res: any) => {
@@ -78,6 +110,22 @@ submit: apiClient.roleCreate
 ```
   -**mapFunction (Optional,Function)**: This optional function allows for manipulation of the request that we got from the form data , enabling the reformatting of the request to align with specific requirements before executing the submit function so we can use the manipulated request in the submit funcion.
 
+  example for submitHandler prop : 
+
+  ```
+  const submitHandler: FormSubmitHandler<RoleCreateRequest, RoleCreateRequest, RoleCreateResponse> = {
+  submit: apiClient.roleCreateWithErr,
+  submitCallBack: (res: any) => {
+    router.push({ name: "list" })
+  },
+  errorHandler : {
+    'unique_constraint_roles_role_name_key': {
+      roleName: 'unique_constraint_roles_role_name_key'
+    }
+  }
+}
+  ```
+
 ### toastHandler Prop
 
 - **toastHandler (Optional, Function)**: A function to handle toast notifications appearance. If not provided, a default handler will be used. Here's an example : 
@@ -88,9 +136,12 @@ const toastHandler: FormKitToastHandler = {
   message : 'You have completed the purchase sucssefully'
 }
 ```
-## data-update-form component
+
+
+## data-update-form
 
 The `data-update-form` component shares the same props structure as the `data-create-form` component, with the addition of a unique, required prop: `findDataHandler`.
+
 
 - **findDataHandler (Required, Object)** : This prop is only present in the `data-update-form` component, and is responsible for populating the form with specific data in the update page. It contains:
 
@@ -257,5 +308,54 @@ const findDataHandler: FormFindDataHandler<RoleFindRequest, RoleFindResponse, an
 ```
 !['data-update-form example output'](./src/assets/data-update-form%20example.gif)
 
+## data-filter-form
 
+The `data-filter-form` is a key component of our package that significantly enhances user experience by automating the generation of a filtering form. This is achieved based on the inputs passed as props to the component. One of the standout features of `data-filter-form` is its ability to handle live filtering through the use of events. This makes it an essential tool for efficiently creating and managing your filter form. Therefore, a proficient understanding of how to use props and listen to events is highly beneficial when utilizing this component.
 
+**props**
+
+**inputs(required, array : FormKitInput)** : this required prop is the only props that `data-filter-form` component provide and it accepts an  array of type `FormKitInput` which represents the array of inputs that the filter form will contain 
+
+example : 
+
+```
+const inputs: Array<FormKitInput | FormKitComponent> = [
+  {
+    $formkit: 'text',
+    outerClass: "col-3",
+    name: 'userEmail',
+    label: 'by_email_address',
+    placeholder: 'Enter email address',
+  },
+  {
+    $formkit: 'text',
+    outerClass: "col-3",
+    name: 'userName',
+    label: 'by_username',
+    placeholder: 'enter username',
+  },
+
+  {
+    $formkit: 'text',
+    outerClass: "col-3",
+    name: 'UserPhone',
+    label: 'phone_number',
+    placeholder: 'Type phone number',
+  },
+]
+```
+
+output : 
+
+!['data-filter-form example'](./src/assets/example3.png)
+!['data-filter-form example'](./src/assets/example4.png)
+
+### events
+
+**@filter**
+
+A noteworthy event is `@filter`. This event is designed to send a filterObject, which includes a key symbolizing the name of the filter utilized by the user, as well as a value representing the filter value that the user has applied to sort the data. This allows for a dynamic and user-responsive filtering process, enhancing the overall data management experience.
+
+**@clearFilter**
+
+Yet another event to be mindful of is `@clearFilter`. This event serves to notify you when a user has removed all previously applied filters. By listening for this event, you can take action to revert back and display the original, unfiltered data. This ensures that the data presented is always in line with the user's current filtering preferences, providing a seamless and user-friendly experience.

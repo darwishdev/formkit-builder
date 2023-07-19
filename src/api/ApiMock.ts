@@ -1,5 +1,5 @@
 import permissions from '@/api/permissions'
-import type { FormKitSelectOptions } from '@/types/index';
+import type { FormKitSelectOptions, FileRemoveRequest, FileUploadRequest, FileUploadResponse } from '@/types/index';
 import type {
     PermissionsListResponse, RoleCreateResponse, ApiClient, RoleCreateRequest, RolesListResponse, RoleUpdateRequest, RoleUpdateResponse, RoleFindRequest, RoleFindResponse
 } from './ApiTypes'
@@ -81,7 +81,18 @@ export const rolesInputOptions: FormKitSelectOptions[] = [
     { label: 'Cashier', value: 3 },
     { label: 'Waiter', value: 4 }
 ]
+
+export const fileUploadResponse: FileUploadResponse = {
+    fileName: "dashboard_07182023092203PM.png"
+}
 const apiClient: ApiClient = {
+    fileUpload: async (req: FileUploadRequest): Promise<FileUploadResponse> => {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        return fileUploadResponse;
+    },
+    fileRemove: async (req: FileRemoveRequest): Promise<void> => {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+    },
     permissionsList: async (): Promise<PermissionsListResponse> => {
         await new Promise((resolve) => setTimeout(resolve, 1000));
         return permissions;

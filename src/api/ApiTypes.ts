@@ -1,4 +1,4 @@
-import type { FormKitSelectOptions } from '@/types/index';
+import type { FileUploadResponse, FileUploadRequest, FileRemoveRequest, FormKitSelectOptions } from '@/types/index';
 export interface Permission {
     permission_id: number
     permission_name: string
@@ -94,4 +94,7 @@ export interface ApiClient {
     roleFindWithErr: (req: RoleFindRequest) => Promise<RoleFindResponse>
     getRolesInput: () => Promise<FormKitSelectOptions[]>
     getRolesInputWithErr: () => Promise<FormKitSelectOptions[]>
+    fileUpload: (req: FileUploadRequest) => Promise<FileUploadResponse>
+    fileRemove: (req: FileRemoveRequest) => Promise<void>
+
 }

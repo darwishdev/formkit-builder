@@ -1,4 +1,5 @@
 import PermissionsInput from "@/components/PermissionsInput.vue"
+import FileUploadInput from "@/components/FileUploadInput.vue"
 import { createInput } from '@formkit/vue'
 import type { DefaultConfigOptions } from '@formkit/vue'
 
@@ -58,14 +59,21 @@ function scrollToErrors(node: any) {
     return false;
 }
 
-const getWrappedConfig = (defaultConfig: DefaultConfigOptions) => {
+const getWrappedConfig = (defaultConfig: DefaultConfigOptions, options: { activateFileUpload: boolean }) => {
     const permissionsInput = createInput(PermissionsInput, {
         props: ['permissions'],
     })
+    const fileUploadInput = createInput(FileUploadInput, {
+        props: ['fileUpload'],
+    })
     if (defaultConfig.inputs) {
         defaultConfig.inputs['permissions'] = permissionsInput
+
     } else {
         defaultConfig.inputs = { permissions: permissionsInput }
+    }
+    if (options.activateFileUpload) {
+        defaultConfig.inputs['fileUpload'] = fileUploadInput
     }
     if (defaultConfig.plugins) {
         defaultConfig.plugins?.push(addAsteriskPlugin)

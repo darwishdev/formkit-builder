@@ -10,9 +10,23 @@ import { useToast } from "primevue/usetoast";
 // import { useI18n } from 'vue-i18n';
 import FilterIcon from '@/components/FilterIcon.vue'
 import FormkitBuilder from "./FormkitBuilder"
+
+import apiClient from "@/api/ApiMock"
+import 'primeicons/primeicons.css'
 import './assets/app.scss'
+import 'primevue/resources/primevue.min.css'
+import './assets/prime_theme.scss'
+import type { UploadHandler } from './types';
+
+
+
 const app = createApp(App)
 
-app.use(i18n).use(PrimeVue).use(FormkitBuilder, { useToast, i18n, formKitConfig }).use(ToastService).use(router)
+
+const uploadHandler: UploadHandler = {
+    fileUpload: apiClient.fileUpload,
+    fileRemove: apiClient.fileRemove,
+}
+app.use(i18n).use(PrimeVue).use(FormkitBuilder, { uploadHandler, useToast, i18n, formKitConfig }).use(ToastService).use(router)
 app.component("FilterIcon", FilterIcon)
 app.mount('#app')

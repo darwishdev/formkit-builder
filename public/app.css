@@ -11,7 +11,7 @@
 .grid > .col,
 .grid > [class*=col] {
   box-sizing: border-box;
-}a
+}
 
 .grid-nogutter {
   -webkit-margin-end: 0;
@@ -22513,6 +22513,7 @@
   --fk-day-bg: var(--color-card);
   --fk-day-bg-hover: rgba(23,255,255,1)
   // --fk-color-border-focus: red;
+  --fk-color-primary: transparent;
   --fk-color-tag-background: #c8e6c9;
   --fk-day-bg-selected:var(--color-primary);
   --fk-dropdown-active-bg:var(--color-primary);
@@ -22768,6 +22769,19 @@ nav a {
 
 .vh-50 {
   height: 50vh;
+}
+
+.disabled {
+  cursor: not-allowed;
+}
+.disabled::after {
+  content: "";
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .active-filters {

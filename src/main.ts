@@ -16,6 +16,8 @@ import 'primeicons/primeicons.css'
 import './assets/app.scss'
 import 'primevue/resources/primevue.min.css'
 import './assets/prime_theme.scss'
+import './assets/primeflex.css'
+import './assets/base.css'
 import type { UploadHandler } from './types';
 
 

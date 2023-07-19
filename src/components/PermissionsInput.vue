@@ -152,24 +152,3 @@ function toggleSelectAll(value) {
 
     </div>
 </template>
-
-<style lang="scss">
-.permissions_input {
-    width: 100%;
-
-    & .p-panel {
-        margin: 10px 0;
-
-        & .p-panel-icons {
-            align-items: center;
-            display: flex;
-        }
-
-        & .p-panel-header {
-            padding: 20px;
-            background: var(--color-card);
-            border-radius: 6px;
-        }
-    }
-}
-</style>

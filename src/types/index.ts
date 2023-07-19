@@ -201,6 +201,7 @@ export type FileRemoveRequest = {
 export type UploadHandler = {
     fileUpload: (reuest: FileUploadRequest) => Promise<FileUploadResponse>
     fileRemove: (reuest: FileRemoveRequest) => Promise<void>
+    baseImageUrl: string
 }
 
 export default interface FormKitFactoryInterface {

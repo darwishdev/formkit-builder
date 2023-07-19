@@ -28,6 +28,7 @@ const app = createApp(App)
 const uploadHandler: UploadHandler = {
     fileUpload: apiClient.fileUpload,
     fileRemove: apiClient.fileRemove,
+    baseImageUrl: import.meta.env.VITE_IMG_URL
 }
 app.use(i18n).use(PrimeVue).use(FormkitBuilder, { uploadHandler, useToast, i18n, formKitConfig }).use(ToastService).use(router)
 app.component("FilterIcon", FilterIcon)

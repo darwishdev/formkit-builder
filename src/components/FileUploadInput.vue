@@ -5,7 +5,6 @@ import { reset } from '@formkit/vue';
 const route = useRoute()
 
 const uploadHandler = inject('uploadHandler')
-const baseImage = import.meta.env.VITE_IMG_URL
 const loading = ref(false)
 
 
@@ -71,6 +70,7 @@ const props = defineProps({
 </script>
 
 <template>
+    {{ baseImage }}
     <div class="upload" :class="{ 'disabled': loading }">
         <div class="loader" v-if="loading">
             <svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
@@ -91,7 +91,8 @@ const props = defineProps({
         </div>
         <div v-if="props.context._value" class="img-wrapper" @click.prevent="handleFileRemove">
             <!-- {{ `${baseImage}${props.context._value}` }} -->
-            <img class="uploaded-img" :src="`${baseImage}${props.context._value}`" :alt="props.context._value" />
+            <img class="uploaded-img" :src="`${uploadHandler.baseImageUrl}${props.context._value}`"
+                :alt="props.context._value" />
             <div class="remove">
                 <i class="pi pi-trash"></i>
                 {{ $t('remove') }}

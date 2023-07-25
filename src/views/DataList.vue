@@ -31,6 +31,7 @@ const inputs: Array<FormKitInput | FormKitComponent> = [
         label: 'phone_number',
         placeholder: 'Type phone number',
     },
+
 ]
 const handleFilter = (filterObject: Object) => {
     // console.log('filterObject')
@@ -53,5 +54,7 @@ const handleClearFilters = () => {
             <p>roleName : {{ role.roleName }}</p>
             <hr />
         </div>
+
+        <form-kit type="fileUpload" outerClass="col-12" name='image' label='image' />
     </div>
 </template>

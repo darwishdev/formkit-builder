@@ -186,6 +186,23 @@ export type FormKitGrid = {
     children: Array<FormKitInput | FormKitSubmit>
 }
 
+export type FileUploadRequest = {
+    fileName: string;
+    fileData: Uint8Array;
+}
+
+
+export type FileUploadResponse = {
+    fileName: string;
+}
+export type FileRemoveRequest = {
+    fileName: string;
+}
+export type UploadHandler = {
+    fileUpload: (reuest: FileUploadRequest) => Promise<FileUploadResponse>
+    fileRemove: (reuest: FileRemoveRequest) => Promise<void>
+    baseImageUrl: string
+}
 
 export default interface FormKitFactoryInterface {
     CreateSectionOutput(section: FormKitSection): FormKitSectionOutput

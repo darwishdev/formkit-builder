@@ -1,5 +1,22 @@
-import type { FormKitSelectOptions } from '@/types/index';
+import type { FileUploadResponse, FileUploadRequest, FileRemoveRequest, FormKitSelectOptions } from '@/types/index';
+export interface Permission {
+    permission_id: number
+    permission_name: string
+    permission_function: string
+    permission_description: string
+}
 
+export interface PermissionsListRow {
+    group: string;
+
+    permissions: Permission[];
+
+}
+export interface PermissionsListResponse {
+    permissions: PermissionsListRow[],
+    permissionsIds: number[]
+
+}
 export interface Role {
     roleId: number;
     roleName: string;
@@ -64,6 +81,7 @@ export interface RolesListResponse {
 
 
 export interface ApiClient {
+    permissionsList: () => Promise<PermissionsListResponse>
     rolesList: (request: RolesListRequest) => Promise<RolesListResponse>
     rolesListWithErr: (request: RolesListRequest) => Promise<RolesListResponse>
     roleCreate: (req: RoleCreateRequest) => Promise<RoleCreateResponse>
@@ -76,4 +94,7 @@ export interface ApiClient {
     roleFindWithErr: (req: RoleFindRequest) => Promise<RoleFindResponse>
     getRolesInput: () => Promise<FormKitSelectOptions[]>
     getRolesInputWithErr: () => Promise<FormKitSelectOptions[]>
+    fileUpload: (req: FileUploadRequest) => Promise<FileUploadResponse>
+    fileRemove: (req: FileRemoveRequest) => Promise<void>
+
 }

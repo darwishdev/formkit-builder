@@ -1,6 +1,7 @@
-import type { FormKitSelectOptions } from '@/types/index';
+import permissions from '@/api/permissions'
+import type { FormKitSelectOptions, FileRemoveRequest, FileUploadRequest, FileUploadResponse } from '@/types/index';
 import type {
-    RoleCreateResponse, ApiClient, RoleCreateRequest, RolesListResponse, RoleUpdateRequest, RoleUpdateResponse, RoleFindRequest, RoleFindResponse
+    PermissionsListResponse, RoleCreateResponse, ApiClient, RoleCreateRequest, RolesListResponse, RoleUpdateRequest, RoleUpdateResponse, RoleFindRequest, RoleFindResponse
 } from './ApiTypes'
 export const roleCreateRequest: RoleCreateRequest = {
     roleName: "head chef",
@@ -80,7 +81,22 @@ export const rolesInputOptions: FormKitSelectOptions[] = [
     { label: 'Cashier', value: 3 },
     { label: 'Waiter', value: 4 }
 ]
+
+export const fileUploadResponse: FileUploadResponse = {
+    fileName: "dashboard_07182023092203PM.png"
+}
 const apiClient: ApiClient = {
+    fileUpload: async (req: FileUploadRequest): Promise<FileUploadResponse> => {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        return fileUploadResponse;
+    },
+    fileRemove: async (req: FileRemoveRequest): Promise<void> => {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+    },
+    permissionsList: async (): Promise<PermissionsListResponse> => {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        return permissions;
+    },
     roleCreate: async (req: RoleCreateRequest): Promise<RoleCreateResponse> => {
         await new Promise((resolve) => setTimeout(resolve, 1000));
         return roleCreateResponse;

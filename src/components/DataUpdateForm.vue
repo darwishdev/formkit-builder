@@ -7,7 +7,7 @@ import { useDataFetcherFind } from 'vue-data-fetcher'
 import FormKitFactory from "@/factory/FormKitFactory"
 import { useRoute, useRouter } from 'vue-router'
 import type { I18n } from 'vue-i18n/dist/vue-i18n.js';
-import { handleSuccessToast, handleError } from '@/components/shared/FormHelpers'
+import { handleSuccessToast, handleError } from '@/FormHelpers'
 // import type { FormKitNode } from "@formkit/core"
 const { push } = useRouter();
 const useToast = inject("useToast") as () => ToastServiceMethods;

@@ -1,6 +1,7 @@
 import type {
-    UserCreateResponse, ApiClient, UserCreateRequest, UserUpdateRequest, UserUpdateResponse, UserFindRequest, UserFindResponse
+    PermissionsListResponse, UserCreateResponse, ApiClient, UserCreateRequest, UserUpdateRequest, UserUpdateResponse, UserFindRequest, UserFindResponse
 } from './ApiTypes'
+import permissions from '@/api/permissions'
 export const userCreateRequest: UserCreateRequest = {
     userName: "admin",
     userPhone: "010202000200",
@@ -58,6 +59,10 @@ export const userFindResponse: UserFindResponse = {
     userRoles: [1, 2, 3, 4]
 };
 const apiClient: ApiClient = {
+    permissionsList: async (): Promise<PermissionsListResponse> => {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        return permissions;
+    },
     userCreate: async (req: UserCreateRequest): Promise<UserCreateResponse> => {
         await new Promise((resolve) => setTimeout(resolve, 1000));
         return userCreateResponse;

@@ -74,12 +74,11 @@ const options: FormKitOptions = {
   allowBulkDelete: false,
 }
 const submitHandler: FormSubmitHandler<RoleCreateRequest, RoleCreateRequest, RoleCreateResponse> = {
-  submit: apiClient.roleCreate,
+  submit: apiClient.roleCreateWithErr,
   submitCallBack: (res: any) => {
     router.push({ name: "list" })
   },
   errorHandler,
-  // redirectRoute,
 }
 </script>
 
